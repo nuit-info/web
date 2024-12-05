@@ -1,12 +1,15 @@
 <div class="bg-blue-100 min-h-screen p-8">
-  <!-- <h1 class="text-4xl font-bold text-center text-blue-900 mb-6">
-    Les liens entre l'océan et le corps humain
-  </h1>
-  <p class="bg-yellow-50 text-center text-lg p-4 rounded-md shadow-md mb-4">
-    L’océan influence notre santé, notre bien-être et même notre survie.
-  </p> -->
-
-  <div
-    class="bg-[url('/assets/img_corps.svg')] bg-center bg-contain bg-no-repeat h-screen"
-  ></div>
+  <div class="relative w-full max-w-[600px] mx-auto">
+    <!-- Image du corps -->
+    <img 
+      src="/assets/img_corps.svg" 
+      alt="Corps humain"
+      class="w-full h-auto" 
+    />
+    <!-- Image du cerveau, positionnée par rapport au corps -->
+    <img 
+      src="/assets/cerveau.svg" 
+      alt="Cerveau"
+      class="absolute left-1/2 transform -translate-x-1/2 top-[3%] w-[10%]" />
+  </div>
 </div>
