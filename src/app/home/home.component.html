@@ -2,36 +2,54 @@
   <div class="relative w-full max-w-[750px] mx-auto">
     <!-- Image du corps -->
     <img src="/assets/img_corps.svg" alt="Corps humain" class="w-full h-auto" />
-    <!-- Image du cerveau, positionnée par rapport au corps -->
+
+    <!-- Image du cerveau -->
     <img
       src="/assets/cerveau.svg"
       alt="Cerveau"
-      class="absolute left-1/2 transform -translate-x-1/2 top-[3%] w-[10%]"
+      class="absolute left-1/2 top-[3%] w-[10%] -translate-x-1/2 transition-transform duration-300 ease-in-out hover:scale-110"
+      (click)="openModal('Cerveau', '/assets/cerveau.svg')"
     />
 
-    <!-- Image de l'artere, positionnée par rapport au corps -->
+    <!-- Image de l'artère -->
     <img
       src="/assets/artere.svg"
       alt="Artere"
-      class="absolute left-1/2 transform -translate-x-1/4 top-[45%] w-[20%]"
+      class="absolute left-1/2 top-[45%] w-[20%] -translate-x-1/4 transition-transform duration-300 ease-in-out hover:scale-110"
+      (click)="openModal('Artère', '/assets/artere.svg')"
     />
 
-    <!-- Image des poumons, positionnée par rapport au corps -->
+    <!-- Image des poumons -->
     <img
       src="/assets/poumons.svg"
       alt="Poumons"
-      class="absolute scale-150 left-1/2 transform -translate-x-1/2 top-[17%] w-[10%]" />
+      class="absolute left-1/2 top-[17%] w-[10%] -translate-x-1/2 transition-transform duration-300 ease-in-out hover:scale-125"
+      (click)="openModal('Poumons', '/assets/poumons.svg')"
+    />
 
-    <!-- Image du coeur, positionnée par rapport au corps -->
+    <!-- Image du cœur -->
     <img
       src="/assets/coeur.svg"
       alt="Coeur"
-      class="absolute scale-75 left-1/2 transform -translate-x-1/4 top-[24%] w-[10%]" />
+      class="absolute left-1/2 top-[24%] w-[10%] -translate-x-1/4 transition-transform duration-300 ease-in-out hover:scale-110"
+      (click)="openModal('Cœur', '/assets/coeur.svg')"
+    />
 
+    <!-- Image des reins -->
     <img
       src="/assets/image_rein.png"
       alt="Reins"
-      class="absolute left-1/2 transform -translate-x-1/2 top-[38%] w-[10%] scale-150"
+      class="absolute left-1/2 top-[38%] w-[10%] -translate-x-1/2 transition-transform duration-300 ease-in-out hover:scale-125"
+      (click)="openModal('Reins', '/assets/image_rein.png')"
     />
+  </div>
+</div>
+
+<!-- Modale -->
+<div id="organModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out">
+  <div class="bg-white p-8 rounded-md w-1/3 text-center">
+    <h2 id="organName" class="text-2xl font-bold mb-4"></h2>
+    <img id="organImage" class="w-full h-auto mb-4" />
+    <button (click)="closeModal()" class="px-4 py-2 bg-blue-500 text-white rounded-md">Fermer</button>
   </div>
 </div>
