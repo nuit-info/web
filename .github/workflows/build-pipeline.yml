@@ -32,7 +32,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: nuit-info-2024/website/main
+          repository: nuit-info/website/main
           tags: latest
 
 #      - name: SSH into server and redeploy
