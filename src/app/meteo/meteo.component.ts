@@ -5,13 +5,14 @@ import { registerLicense } from '@syncfusion/ej2-base';
 import { ZoomService, MarkerService, SelectionService  } from '@syncfusion/ej2-angular-maps'
 import { fetchWeatherApi } from 'openmeteo';
 import { CommonModule } from '@angular/common';
+import {SideBarMeteoComponent} from "../side-bar-meteo/side-bar-meteo.component";
 
 
 @Component({
   selector: 'app-meteo',
   standalone: true,
   imports: [
-    MapsModule,CommonModule
+    MapsModule, CommonModule, SideBarMeteoComponent
   ],
   providers: [ZoomService, MarkerService, SelectionService],
   templateUrl: './meteo.component.html',
