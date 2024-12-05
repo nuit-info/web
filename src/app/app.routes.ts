@@ -1,3 +1,5 @@
 import { Routes } from '@angular/router';
-
-export const routes: Routes = [];
+import {MeteoComponent} from './meteo/meteo.component';
+export const routes: Routes = [
+  {path: 'meteo', component: MeteoComponent},
+];
