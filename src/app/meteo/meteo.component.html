@@ -1,5 +1,5 @@
 <div class="w-screen h-screen">
-  <ejs-maps id='maps-container' class="h-full w-full" [zoomSettings] = 'zoomSettings' (markerClick)="onMarkerClick($event)" >
+  <ejs-maps id='maps-container' height='100%' width='100%' [zoomSettings] = 'zoomSettings' (markerClick)="onMarkerClick($event)" >
     <e-layers>
       <e-layer [shapeData] = 'shapeData' [markerSettings] = 'markerSettings'></e-layer>
     </e-layers>
