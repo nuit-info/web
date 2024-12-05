@@ -2,32 +2,28 @@ import {Component, OnInit} from '@angular/core';
 import {MapsModule} from "@syncfusion/ej2-angular-maps";
 import { world_map } from './world-map';
 import { registerLicense } from '@syncfusion/ej2-base';
-import { ZoomService, MarkerService, SelectionService  } from '@syncfusion/ej2-angular-maps'
+import { MarkerService, SelectionService  } from '@syncfusion/ej2-angular-maps'
 import { fetchWeatherApi } from 'openmeteo';
 import { CommonModule } from '@angular/common';
+import {SideBarMeteoComponent} from "../side-bar-meteo/side-bar-meteo.component";
 
 
 @Component({
   selector: 'app-meteo',
   standalone: true,
   imports: [
-    MapsModule,CommonModule
+    MapsModule, CommonModule, SideBarMeteoComponent
   ],
-  providers: [ZoomService, MarkerService, SelectionService],
+  providers: [ MarkerService, SelectionService],
   templateUrl: './meteo.component.html',
   styleUrl: './meteo.component.css'
 })
 export class MeteoComponent implements OnInit{
   public shapeData: object = world_map;
-  public zoomSettings?: object;
   public markerSettings?: object;
   public openSideBar: boolean =false;
 
   ngOnInit(): void {
-    this.zoomSettings = {
-      enable: true,
-      toolbars: ['ZoomIn', 'ZoomOut', 'Pan', 'Reset']
-    };
     this.markerSettings = [{
       visible: true,
       selectionSettings: {
