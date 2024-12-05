@@ -22,6 +22,7 @@ export class MeteoComponent implements OnInit{
   public zoomSettings?: object;
   public markerSettings?: object;
   public openSideBar: boolean =false;
+  public data: any;
 
   ngOnInit(): void {
     this.zoomSettings = {
@@ -105,6 +106,7 @@ export class MeteoComponent implements OnInit{
       },
 
     };
+    this.data = weatherData;
     console.log(weatherData);
 
   }
