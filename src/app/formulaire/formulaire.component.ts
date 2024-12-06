@@ -50,14 +50,13 @@ export class FormulaireComponent {
   }
 
   onContextMenu(event: MouseEvent): void {
-    event.preventDefault();  // Disable right-click context menu
+    event.preventDefault(); // Disable right-click context menu
     alert('Haha bien essayé');
   }
 
   submit(): void {
     if (this.numberClick === this.clicksNeeded) {
-      console.log(this.inputValue);
-      if (this.inputValue.toLowerCase() === "baleine") {
+      if (this.inputValue.toLowerCase() === 'baleine') {
         alert("Bravo, vous avez répondu correctement : 'Baleine'");
       } else {
         alert("Désolé, ce n'est pas la bonne réponse");
@@ -72,10 +71,10 @@ export class FormulaireComponent {
       this.numberClick += 1;
 
       const newX = Math.trunc(
-        Math.random() * window.innerWidth - window.innerWidth / 2
+        (Math.random() * window.innerWidth) / 2 - window.innerWidth / 2
       );
       const newY = Math.trunc(
-        Math.random() * window.innerHeight - window.innerHeight / 2
+        (Math.random() * window.innerHeight) / 2 - window.innerHeight / 2
       );
 
       console.log(newX, newY);
