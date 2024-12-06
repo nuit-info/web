@@ -1,0 +1,16 @@
+<div class="rain-container">
+  <div *ngFor="let pictogram of pictograms; let i = index"
+       [ngStyle]="{
+         'color': pictogram.color,
+         'left': pictogram.x + 'px',
+         'top': pictogram.y + 'px',
+         'width': pictogram.size + 'px',
+         'height': pictogram.size + 'px',
+         'animation-delay': pictogram.animationDelay + 's',
+         'animation-duration': getIntensity() + 's'
+       }"
+       class="pictogram"
+       (animationiteration)="resetPosition(i)">
+    <div [innerHTML]="pictogram.svg"></div>
+  </div>
+</div>
