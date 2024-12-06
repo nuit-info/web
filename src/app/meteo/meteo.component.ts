@@ -27,6 +27,7 @@ export class MeteoComponent implements OnInit{
   public openSideBar: boolean =false;
   public data: any;
   public background: string = '#006994';
+  public selected_tempo: string = "current";
 
   ngOnInit(): void {
     this.markerSettings = [{
@@ -67,7 +68,7 @@ export class MeteoComponent implements OnInit{
   async onMarkerClick(args: any) {
     this.openSideBar = !this.openSideBar;
 
-    this.meteoService.getMeteo(args.data.latitude, args.data.longitude).then(value => {
+    this.meteoService.getMeteo(args.data.latitude, args.data.longitude, ).then(value => {
       this.data = value
       this.weatherIconService.manageIcon(value)
       console.log(value)

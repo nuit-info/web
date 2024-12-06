@@ -1,4 +1,10 @@
 <div class="w-screen h-screen overflow-hidden flex">
+  <div class="w-1/4 absolute left-0 top-0">
+    <select [(ngModel)]='selected_tempo' name="selectOption" id="selectOption" class='form-control'>
+      <option value="current">Current</option>
+      <option value="hourly">Hourly</option>
+    </select>
+  </div>
   <div class="w-full h-full ">
     <ejs-maps id='maps-container' height='100%' width='100%' theme='Tailwind' (markerClick)="onMarkerClick($event)" >
       <e-layers>
