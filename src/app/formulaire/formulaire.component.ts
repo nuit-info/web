@@ -44,8 +44,11 @@ export class FormulaireComponent {
     this.inputValue = newValue;
   }
 
-  // Handle submit
   submit(): void {
+    console.log('submitting');
+  }
+  // Handle submit
+  moveButton(): void {
     const buttonsubmit = document.getElementById('buttonsubmit')!;
 
     if (this.numberClick < this.clicksNeeded) {
