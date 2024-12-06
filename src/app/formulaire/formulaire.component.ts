@@ -10,18 +10,29 @@ import { Component } from '@angular/core';
 export class FormulaireComponent {
   inputValue: string = ''; // Variable to hold input value
   numberClick: number = 0;
+  clicksNeeded: number = Math.trunc(Math.random() * 5) + 3
 
   // Handle input change
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value; // Update the input value
+    const previousValue = this.inputValue || ''; // Valeur précédente (par défaut vide)
+
+    // Trouver la lettre ajoutée
+    const addedLetter = this.inputValue.length > previousValue.length
+      ? this.inputValue[this.inputValue.length - 1] // Dernière lettre ajoutée
+      : null; // Rien ajouté, ou suppression
+
+    console.log(addedLetter);
   }
+
+
 
   // Handle submit
   submit(): void {
     const buttonsubmit = document.getElementById('buttonsubmit')!;
 
-    if (this.numberClick < 3) {
+    if (this.numberClick < this.clicksNeeded) {
       this.numberClick += 1;
 
       const newX = Math.trunc(
