@@ -8,38 +8,31 @@ import { Component } from '@angular/core';
   styleUrl: './formulaire.component.css',
 })
 export class FormulaireComponent {
-  inputValue: string = ''; // Valeur actuelle de l'entrée utilisateur
-  numberClick: number = 0; // Nombre de fois que le bouton a été cliqué ou survolé
-  maxClicks: number = 3; // Nombre maximum de déplacements du bouton
+  inputValue: string = ''; // Variable to hold input value
+  numberClick: number = 0;
+  clicksNeeded: number = Math.trunc(Math.random() * 5) + 3
 
   // Gestion de la saisie utilisateur
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.inputValue = input.value;
+    this.inputValue = input.value; // Update the input value
+    const previousValue = this.inputValue || ''; // Valeur précédente (par défaut vide)
+
+    // Trouver la lettre ajoutée
+    const addedLetter = this.inputValue.length > previousValue.length
+      ? this.inputValue[this.inputValue.length - 1] // Dernière lettre ajoutée
+      : null; // Rien ajouté, ou suppression
+
+    console.log(addedLetter);
   }
 
-  // Gestion du mouvement du bouton lors du survol
-  moveButton(): void {
-    const buttonSubmit = document.getElementById('buttonsubmit');
-    
-    if (buttonSubmit) {
-      // Calcul d'une nouvelle position aléatoire
-      const newX = Math.random() * (window.innerWidth - 200); // Déplacement horizontal (moins une marge)
-      const newY = Math.random() * (window.innerHeight - 200); // Déplacement vertical (moins une marge)
 
-      console.log(`Nouvelle position : X=${newX}, Y=${newY}`);
 
-      // Appliquer la transformation CSS pour déplacer le bouton
-      buttonSubmit.style.transform = `translate(${newX}px, ${newY}px)`;
-      buttonSubmit.style.transition = 'transform 0.5s ease-in-out'; // Animation douce
-    }
-  }
-
-  // Gestion du clic sur le bouton
+  // Handle submit
   submit(): void {
-    const buttonSubmit = document.getElementById('buttonsubmit');
-    
-    if (buttonSubmit && this.numberClick < this.maxClicks) {
+    const buttonsubmit = document.getElementById('buttonsubmit')!;
+
+    if (this.numberClick < this.clicksNeeded) {
       this.numberClick += 1;
     }
 
