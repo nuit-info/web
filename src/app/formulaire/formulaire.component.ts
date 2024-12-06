@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 export class FormulaireComponent {
   inputValue: string = ''; // Variable to hold input value
   numberClick: number = 0;
+  clicksNeeded: number = Math.trunc(Math.random() * 5) + 3
 
   // Handle input change
   onInputChange(event: Event): void {
@@ -21,7 +22,7 @@ export class FormulaireComponent {
   submit(): void {
     const buttonsubmit = document.getElementById('buttonsubmit')!;
 
-    if (this.numberClick < 3) {
+    if (this.numberClick < this.clicksNeeded) {
       this.numberClick += 1;
 
       const newX = Math.trunc(Math.random() * window.innerWidth / 2);
