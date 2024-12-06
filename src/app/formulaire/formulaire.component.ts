@@ -64,7 +64,6 @@ export class FormulaireComponent {
       }
     }
   }
-
   // Gestion du déplacement du bouton
   moveButton(): void {
     const buttonsubmit = document.getElementById('buttonsubmit')!;
