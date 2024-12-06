@@ -5,37 +5,42 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './formulaire.component.html',
-  styleUrl: './formulaire.component.css',
+  styleUrls: ['./formulaire.component.css'],
 })
 export class FormulaireComponent {
   inputValue: string = ''; // Variable to hold input value
   numberClick: number = 0;
-  clicksNeeded: number = Math.trunc(Math.random() * 5) + 3;
+  clicksNeeded: number = Math.trunc(Math.random() * 5) + 6; // Random number between 6 and 10
 
   // Gestion de la saisie utilisateur
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const newValue = input.value; // Nouvelle valeur du champ
-    const previousValue = this.inputValue || ''; // Valeur précédente (par défaut vide)
-
-    // Trouver la lettre ajoutée
-    const addedLetter = newValue.length > previousValue.length
-      ? newValue[newValue.length - 1] // Dernière lettre ajoutée
-      : null; // Rien ajouté, ou suppression
-
-
-    console.log(addedLetter);
-    this.inputValue = newValue;
+    this.inputValue = input.value; // Update the input value
   }
 
-  // Gestion du déplacement du bouton survolé
+  // Fonction pour obtenir la position de l'image de la baleine
+  getBaleinePosition(): DOMRect {
+    const baleineImage = document.getElementById('baleine-image');
+    return baleineImage ? baleineImage.getBoundingClientRect() : new DOMRect(0, 0, 0, 0);
+  }
+
+  // Gestion du déplacement du bouton lors du survol
   moveButton(): void {
     const buttonsubmit = document.getElementById('buttonsubmit');
+    
+    if (this.numberClick < this.clicksNeeded && buttonsubmit) {
+      this.numberClick += 1;
 
-    if (buttonsubmit) {
-      // Calcul d'une nouvelle position aléatoire
-      const newX = Math.random() * (window.innerWidth); // Déplacement horizontal (moins une marge)
-      const newY = Math.random() * (window.innerHeight); // Déplacement vertical (moins une marge)
+      // Obtenir la position de l'image de la baleine
+      const baleinePosition = this.getBaleinePosition();
+
+      // Calculer les limites de déplacement
+      const maxX = baleinePosition.left;  // Le bouton doit se déplacer à gauche de la baleine
+      const maxY = baleinePosition.top;   // Le bouton doit se déplacer au-dessus de la baleine
+
+      // Générer une position aléatoire à l'intérieur de cette zone
+      const newX = Math.random() * maxX;  // Position aléatoire à gauche de la baleine
+      const newY = Math.random() * maxY;  // Position aléatoire au-dessus de la baleine
 
       console.log(`Nouvelle position : X=${newX}, Y=${newY}`);
 
@@ -45,18 +50,20 @@ export class FormulaireComponent {
     }
   }
 
-  // Gestion du clic sur le bouton
+  // Gestion du clic sur le bouton (validation)
   submit(): void {
-    const buttonsubmit = document.getElementById('buttonsubmit');
-
-    if (this.numberClick < this.clicksNeeded) {
-      this.numberClick += 1;
-    }
-
     if (this.numberClick >= this.clicksNeeded) {
-      console.log('Nombre maximum de déplacements atteint !');
+      if (this.inputValue.toLowerCase() === 'baleine') {
+        console.log('Formulaire validé !');
+        alert('Bravo, vous avez répondu correctement : "Baleine"');
+      } else {
+        console.log('Réponse incorrecte');
+        alert('Désolé, ce n\'est pas la bonne réponse.');
+      }
+    } else {
+      console.log('Cliquez encore pour déplacer le bouton');
+      alert('Cliquez encore pour déplacer le bouton avant de valider.');
     }
-
     console.log('Valeur saisie :', this.inputValue);
   }
 }
