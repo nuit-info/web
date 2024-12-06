@@ -3,8 +3,6 @@ import {CommonModule, NgIf} from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {CaptchaComponent} from "./captcha/captcha.component";
 import {RainOfPictogramsComponent} from "./components/rain-of-pictograms/rain-of-pictograms.component";
-import { RouterOutlet } from '@angular/router';
-import {RainOfPictogramsComponent} from "./components/rain-of-pictograms/rain-of-pictograms.component";
 import {MeteoService} from "./services/meteo.service";
 import {MeteoResponse} from "./models/meteo-response";
 import {WeatherIconService} from "./services/weather-icon.service";
