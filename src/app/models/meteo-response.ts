@@ -5,5 +5,7 @@ export interface MeteoResponse {
     precipitation: number;
     windSpeed10m: number;
     windDirection10m: number;
+    isDay: number;
+    weatherCode: number;
   },
 }
