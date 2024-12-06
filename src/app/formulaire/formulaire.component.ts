@@ -24,12 +24,8 @@ export class FormulaireComponent {
     if (this.numberClick < 3) {
       this.numberClick += 1;
 
-      const newX = Math.trunc(
-        Math.random() * window.innerWidth - window.innerWidth / 2
-      );
-      const newY = Math.trunc(
-        Math.random() * window.innerHeight - window.innerHeight / 2
-      );
+      const newX = Math.trunc(Math.random() * window.innerWidth / 2);
+      const newY = Math.trunc(Math.random() * window.innerHeight / 2);
 
       console.log(newX, newY);
       console.log(`translate-x-[${newX}px]`, `translate-y-[${newY}px]`);
