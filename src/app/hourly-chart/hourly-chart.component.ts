@@ -65,15 +65,11 @@ export class HourlyChartComponent implements OnInit {
     // Axes
     svg.append('g')
       .attr('transform', `translate(0,${height})`)
-<<<<<<< HEAD
       .call(
         d3.axisBottom(x).tickFormat((domainValue: Date | d3.NumberValue) =>
           d3.timeFormat('%a %Hh')(new Date(+domainValue))
         )
       );
-=======
-      .call(d3.axisBottom(x).tickFormat(d3.timeFormat('%a %Hh') as (d: number | { valueOf(): number }) => string));
->>>>>>> 853ca5014a10c948afb5d606cc6a4813fa584047
 
     svg.append('g')
       .call(d3.axisLeft(y));
