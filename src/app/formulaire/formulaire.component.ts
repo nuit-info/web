@@ -15,16 +15,17 @@ export class FormulaireComponent {
   // Gestion de la saisie utilisateur
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.inputValue = input.value; // Update the input value
+    const newValue = input.value; // Nouvelle valeur du champ
     const previousValue = this.inputValue || ''; // Valeur précédente (par défaut vide)
 
     // Trouver la lettre ajoutée
     const addedLetter =
-      this.inputValue.length > previousValue.length
-        ? this.inputValue[this.inputValue.length - 1] // Dernière lettre ajoutée
+      newValue.length > previousValue.length
+        ? newValue[newValue.length - 1] // Dernière lettre ajoutée
         : null; // Rien ajouté, ou suppression
 
     console.log(addedLetter);
+    this.inputValue = newValue;
   }
 
   // Handle submit
