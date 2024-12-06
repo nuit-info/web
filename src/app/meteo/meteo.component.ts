@@ -22,6 +22,8 @@ export class MeteoComponent implements OnInit{
   public shapeData: object = world_map;
   public markerSettings?: object;
   public openSideBar: boolean =false;
+  public data: any;
+  public background: string = '#006994';
 
   ngOnInit(): void {
     this.markerSettings = [{
@@ -63,7 +65,7 @@ export class MeteoComponent implements OnInit{
 
   async onMarkerClick(args: any) {
     console.log(args);
-    this.openSideBar = true;
+    this.openSideBar = !this.openSideBar;
 
     const params = {
       "latitude": args.data.latitude,
@@ -94,14 +96,23 @@ export class MeteoComponent implements OnInit{
     const weatherData = {
       current: {
         time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
-        temperature2m: current.variables(0)!.value(),
-        precipitation: current.variables(1)!.value(),
-        windSpeed10m: current.variables(2)!.value(),
+        temperature2m: current.variables(0)!.value().toFixed(1),
+        precipitation: current.variables(1)!.value().toFixed(1),
+        windSpeed10m: current.variables(2)!.value().toFixed(1),
         windDirection10m: current.variables(3)!.value(),
       },
 
     };
+
+    this.data = weatherData;
+
     console.log(weatherData);
 
+  }
+
+  protected readonly close = close;
+
+  closeSidebar() {
+    this.openSideBar = false;
   }
 }
