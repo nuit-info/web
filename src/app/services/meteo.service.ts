@@ -43,9 +43,9 @@ export class MeteoService {
     const weatherData = {
       current: {
         time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
-        temperature2m: current.variables(0)!.value(),
-        precipitation: current.variables(1)!.value(),
-        windSpeed10m: current.variables(2)!.value(),
+        temperature2m: current.variables(0)!.value().toFixed(1),
+        precipitation: current.variables(1)!.value().toFixed(1),
+        windSpeed10m: current.variables(2)!.value().toFixed(1),
         windDirection10m: current.variables(3)!.value(),
         isDay: current.variables(4)!.value(),
         weatherCode: current.variables(5)!.value(),
