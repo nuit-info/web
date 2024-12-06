@@ -1,0 +1,12 @@
+<div class="flex items-center justify-center h-screen bg-gray-100">
+  <div #modal class="relative w-[800px] h-[500px] bg-blue-500 border-2 border-gray-700 rounded-lg shadow-2xl p-6">
+    <div
+      class="absolute w-20 h-20 bg-white rounded-full cursor-pointer shadow-lg"
+      [ngStyle]="{'top.px': position.y, 'left.px': position.x}"
+      (click)="handleClick()"
+    ></div>
+    <p *ngIf="captchaValidated" class="absolute inset-x-0 bottom-6 text-center text-2xl font-semibold text-white">
+      ✅ Captcha validé !
+    </p>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+.rain-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 49;
+  overflow: hidden;
+}
+
+.pictogram {
+  position: absolute;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(110vh);
+  }
+}

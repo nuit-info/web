@@ -1,9 +1,19 @@
-<div class="w-screen h-screen">
-  <ejs-maps id='maps-container' class="h-full w-full" [zoomSettings] = 'zoomSettings' (markerClick)="onMarkerClick($event)" >
-    <e-layers>
-      <e-layer [shapeData] = 'shapeData' [markerSettings] = 'markerSettings'></e-layer>
-    </e-layers>
-  </ejs-maps>
-  <div *ngIf="openSideBar"></div>
+<div class="w-screen h-screen overflow-hidden flex">
+  <div class="w-1/4 absolute left-0 top-0 z-50">
+    <select [(ngModel)]='selected_tempo' name="selectOption" id="selectOption" class='form-control'>
+      <option value="current">Current</option>
+      <option value="hourly">Hourly</option>
+    </select>
+  </div>
+  <div class="w-full h-full ">
+    <ejs-maps id='maps-container' height='100%' width='100%' theme='Tailwind' (markerClick)="onMarkerClick($event)" >
+      <e-layers>
+        <e-layer [shapeData] = 'shapeData' [markerSettings] = 'markerSettings'></e-layer>
+      </e-layers>
+    </ejs-maps>
+  </div>
+  <div *ngIf="openSideBar" class="w-1/3 absolute right-0 border-l-2 border-black bg-white overflow-hidden">
+    <app-side-bar-meteo [data]="data" (close)="closeSidebar()"></app-side-bar-meteo>
+  </div>
 </div>
 
