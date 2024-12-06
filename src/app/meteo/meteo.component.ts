@@ -31,7 +31,6 @@ export class MeteoComponent implements OnInit{
   public openSideBar: boolean =false;
   public data: any;
   public background: string = '#006994';
-  public selected_tempo: string = "current";
 
   ngOnInit(): void {
     this.markerSettings = [{

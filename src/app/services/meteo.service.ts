@@ -64,16 +64,6 @@ export class MeteoService {
 
     };
 
-    // `weatherData` now contains a simple structure with arrays for datetime and weather data
-    for (let i = 0; i < weatherData.hourly.time.length; i++) {
-      console.log(
-        weatherData.hourly.time[i].toISOString(),
-        weatherData.hourly.temperature2m[i],
-        weatherData.hourly.rain[i],
-        weatherData.hourly.weatherCode[i],
-        weatherData.hourly.windSpeed10m[i]
-      );
-    }
     return weatherData;
   }
 }
