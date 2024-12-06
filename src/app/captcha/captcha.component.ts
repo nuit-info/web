@@ -72,7 +72,6 @@ export class CaptchaComponent implements OnInit {
 
   public tourIA: boolean = true; // Début avec l'IA
   public gameOver: boolean = false; // Indique si le jeu est terminé
-  public winner: string | null = null; // Stocke le gagnant
 
   // Fonction pour supprimer des éléments (logique IA)
   IA_supp(dechets: number[]): number[] {
@@ -90,21 +89,20 @@ export class CaptchaComponent implements OnInit {
     return res;
   }
 
-  // Méthode principale pour jouer au jeu
-  playGame(dechets: number[]): void {
-    while (!this.gameOver) {
-      if (this.tourIA) {
-        this.dechets = this.IA_supp(this.dechets);
-      }
+  // playGame(): void {
+  //   while (!this.gameOver) {
+  //     if (this.tourIA) {
+  //       this.dechets = this.IA_supp(this.dechets);
+  //     }
 
-      // Alterner les tours
-      this.tourIA = !this.tourIA;
+  //     // Alterner les tours
+  //     this.tourIA = !this.tourIA;
 
-      // Vérifier si le jeu est terminé
-      if (this.dechets.length === 0) {
-        this.winner = this.tourIA ? 'IA' : 'Joueur';
-        this.gameOver = true;
-      }
-    }
-  }
+  //     // Vérifier si le jeu est terminé
+  //     if (this.dechets.length === 0) {
+  //       this.winner = this.tourIA ? 'IA' : 'Joueur';
+  //       this.gameOver = true;
+  //     }
+  //   }
+  // }
 }
