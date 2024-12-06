@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {MapsModule} from "@syncfusion/ej2-angular-maps";
 import { world_map } from './world-map';
 import { registerLicense } from '@syncfusion/ej2-base';
@@ -9,19 +9,22 @@ import {SideBarMeteoComponent} from "../side-bar-meteo/side-bar-meteo.component"
 import {MeteoService} from "../services/meteo.service";
 import {WeatherIconService} from "../services/weather-icon.service";
 import {FormsModule} from "@angular/forms";
+import { HourlyChartComponent } from '../hourly-chart/hourly-chart.component';
+
 
 
 @Component({
   selector: 'app-meteo',
   standalone: true,
   imports: [
-    MapsModule, CommonModule, SideBarMeteoComponent, FormsModule
+    MapsModule, CommonModule, SideBarMeteoComponent, FormsModule, HourlyChartComponent
   ],
   providers: [ MarkerService, SelectionService],
   templateUrl: './meteo.component.html',
   styleUrl: './meteo.component.css'
 })
 export class MeteoComponent implements OnInit{
+  
   public shapeData: object = world_map;
   public zoomSettings?: object;
   public markerSettings?: object;
