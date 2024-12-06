@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MapsModule} from "@syncfusion/ej2-angular-maps";
 import { world_map } from './world-map';
 import { registerLicense } from '@syncfusion/ej2-base';
-import { ZoomService, MarkerService, SelectionService  } from '@syncfusion/ej2-angular-maps'
+import { MarkerService, SelectionService  } from '@syncfusion/ej2-angular-maps'
 import { fetchWeatherApi } from 'openmeteo';
 import { CommonModule } from '@angular/common';
 import {SideBarMeteoComponent} from "../side-bar-meteo/side-bar-meteo.component";
@@ -14,7 +14,7 @@ import {SideBarMeteoComponent} from "../side-bar-meteo/side-bar-meteo.component"
   imports: [
     MapsModule, CommonModule, SideBarMeteoComponent
   ],
-  providers: [ZoomService, MarkerService, SelectionService],
+  providers: [ MarkerService, SelectionService],
   templateUrl: './meteo.component.html',
   styleUrl: './meteo.component.css'
 })
@@ -26,10 +26,6 @@ export class MeteoComponent implements OnInit{
   public data: any;
 
   ngOnInit(): void {
-    this.zoomSettings = {
-      enable: true,
-      toolbars: ['ZoomIn', 'ZoomOut', 'Pan', 'Reset']
-    };
     this.markerSettings = [{
       visible: true,
       selectionSettings: {
@@ -69,7 +65,7 @@ export class MeteoComponent implements OnInit{
 
   async onMarkerClick(args: any) {
     console.log(args);
-    this.openSideBar = true;
+    this.openSideBar = this.openSideBar ? false : true;
 
     const params = {
       "latitude": args.data.latitude,
