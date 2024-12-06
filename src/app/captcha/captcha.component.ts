@@ -57,7 +57,10 @@ export class CaptchaComponent implements OnInit {
 
   validerSelection(): void {
     console.log('Dechets avant suppression:', this.dechets);
-    this.dechets = this.dechets.filter(dechet => !dechet.selected);
+    this.dechets = this.dechets.filter(dechet => !dechet.selected); 
+    if(this.dechets.length == 0){
+      this.captchaValidated = true;
+    }
     console.log('Dechets après suppression:', this.dechets);
   }
 
@@ -65,38 +68,43 @@ export class CaptchaComponent implements OnInit {
     return dechet.id;  // Retourne l'id pour éviter les réorganisations
   }
 
-  liste_dechets: number[] = Array.from({ length: 22 }, (_, i) => i);
+  // Partie IA
 
-  game_over: boolean = false;
-  tourIA: boolean = false;
+  public tourIA: boolean = true; // Début avec l'IA
+  public gameOver: boolean = false; // Indique si le jeu est terminé
+  public winner: string | null = null; // Stocke le gagnant
 
-  IA_supp(liste: number[]): number[] {
-      let nb_dechets = liste.length;
-      let res = [...liste];
-      if (nb_dechets % 4 === 0) {
-          res.shift(); // Retire le premier élément
-      } else {
-          while (nb_dechets % 4 !== 0) {
-              nb_dechets -= 1;
-          }
-          res = res.slice(0, nb_dechets);
+  // Fonction pour supprimer des éléments (logique IA)
+  IA_supp(dechets: number[]): number[] {
+    let nbDechets = dechets.length;
+    let res = [...dechets];
+
+    if (nbDechets % 4 === 0) {
+      res.shift(); // Retire le premier élément
+    } else {
+      while (nbDechets % 4 !== 0) {
+        nbDechets -= 1;
       }
-      return res;
+      res = res.slice(0, nbDechets);
+    }
+    return res;
   }
 
-  winner: string | null = null;
+  // Méthode principale pour jouer au jeu
+  playGame(dechets: number[]): void {
+    while (!this.gameOver) {
+      if (this.tourIA) {
+        this.dechets = this.IA_supp(this.dechets);
+      }
 
-  // while (game_over) {
-  //    if (tourIA) {
-  //        liste_dechets = IA_supp(liste_dechets);
-  //    }
-//
-  //    tourIA = !tourIA;
-//
- //     if (liste_dechets.length === 0) {
-   //     winner = tourIA ? 'IA' : 'Joueur';
-  //      game_over = true;
-   //   }
-  //}
-//}
+      // Alterner les tours
+      this.tourIA = !this.tourIA;
+
+      // Vérifier si le jeu est terminé
+      if (this.dechets.length === 0) {
+        this.winner = this.tourIA ? 'IA' : 'Joueur';
+        this.gameOver = true;
+      }
+    }
+  }
 }
