@@ -16,7 +16,17 @@ export class FormulaireComponent {
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value; // Update the input value
+    const previousValue = this.inputValue || ''; // Valeur précédente (par défaut vide)
+
+    // Trouver la lettre ajoutée
+    const addedLetter = this.inputValue.length > previousValue.length
+      ? this.inputValue[this.inputValue.length - 1] // Dernière lettre ajoutée
+      : null; // Rien ajouté, ou suppression
+
+    console.log(addedLetter);
   }
+
+
 
   // Handle submit
   submit(): void {
