@@ -1,18 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import {CommonModule, NgIf} from '@angular/common';
+import {RouterLink, RouterOutlet} from '@angular/router';
 import {CaptchaComponent} from "./captcha/captcha.component";
 import {RainOfPictogramsComponent} from "./components/rain-of-pictograms/rain-of-pictograms.component";
 import {WeatherIcon} from "./models/weather-icon";
 import {WEATHER_ICON} from "./app.constant";
-import {registerLicense} from "@syncfusion/ej2-base";
-import {fetchWeatherApi} from "openmeteo";
 import {MeteoService} from "./services/meteo.service";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,CaptchaComponent, RainOfPictogramsComponent],
+  imports: [CommonModule, RouterOutlet, CaptchaComponent, RainOfPictogramsComponent, RouterLink, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -20,6 +18,7 @@ export class AppComponent implements OnInit {
   currentIcon!: WeatherIcon | WeatherIcon[];
   density!: number; // Compris entre 1 et 5
   intensity!: number; // Compris entre 1 et 5
+  isRainActive: boolean = true;
 
   constructor(private meteoService: MeteoService) {
     this.currentIcon = WEATHER_ICON['CLOUDY'];
@@ -52,5 +51,9 @@ export class AppComponent implements OnInit {
     } catch (error) {
       console.error("Erreur lors de la récupération de la position", error);
     }
+  }
+
+  toggleRain() {
+    this.isRainActive = !this.isRainActive;
   }
 }
