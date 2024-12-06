@@ -44,21 +44,37 @@ export class FormulaireComponent {
     this.inputValue = newValue;
   }
 
+  onPaste(): void {
+    alert("HAHA bien essayer");
+  }
+
   submit(): void {
-    console.log('submitting');
+    if (this.numberClick === this.clicksNeeded) {
+      if (this.inputValue.toLowerCase() === "baleine") {
+        alert("Bravo, vous avez répondu correctement : 'Baleine'");
+      } else {
+        alert("Désolé, ce n'est pas la bonne réponse");
+      }
+    }
+
   }
   // Handle submit
   moveButton(): void {
     const buttonsubmit = document.getElementById('buttonsubmit')!;
+    const elementWidth = buttonsubmit.offsetWidth;
+    const elementHeight = buttonsubmit.offsetHeight;
 
     if (this.numberClick < this.clicksNeeded) {
       this.numberClick += 1;
 
+      // Calculer le déplacement aléatoire entre -window.innerWidth / 2 et window.innerWidth / 2
       const newX = Math.trunc(
-        Math.random() * window.innerWidth - window.innerWidth / 2
+        Math.random() * window.innerWidth / 2 - window.innerWidth / 2
       );
+
+      // Calculer le déplacement aléatoire entre -window.innerHeight / 2 et window.innerHeight / 2
       const newY = Math.trunc(
-        Math.random() * window.innerHeight - window.innerHeight / 2
+        Math.random() * window.innerHeight / 2 - window.innerHeight / 2
       );
 
       console.log(newX, newY);
