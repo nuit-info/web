@@ -1,9 +1,12 @@
-<div class="h-screen w-full z-50">
-    <div>
-        <p> Temperature : {{ data.current.temperature2m }} &#8451;</p>
-        <p> Precipitation : {{ data.current.precipitation }} Km/h</p>
-        <p> Vitesse Vent : {{ data.current.windSpeed10m }} Millimeter</p>
+<div class="h-screen w-full z-50 overflow-hidden bg-gradient-to-b from-blue-400 via-blue-300 to-blue-500 flex justify-center">
+    <div class="absolute top-2 right-2" (click)="closeModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M20 20L4 4m16 0L4 20"/></svg>
     </div>
-    
+    <div class="overflow-hidden ">
+      <div class="flex items-center text-white font-bold text-4xl"> <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="currentColor" d="M212 58a26 26 0 1 0 26 26a26 26 0 0 0-26-26m0 40a14 14 0 1 1 14-14a14 14 0 0 1-14 14m-86 56.6V88a6 6 0 0 0-12 0v66.6a30 30 0 1 0 12 0m-6 47.4a18 18 0 1 1 18-18a18 18 0 0 1-18 18m38-67V48a38 38 0 0 0-76 0v87a62 62 0 1 0 76 0m-38 99a50 50 0 0 1-28.57-91a6 6 0 0 0 2.57-5V48a26 26 0 0 1 52 0v90a6 6 0 0 0 2.57 4.92A50 50 0 0 1 120 234"/></svg>{{ data.current.temperature2m }} &#8451;</div>
+        <div class="flex items-center text-white font-bold text-4xl"> <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M13.816 21.612q-.183.104-.379.033t-.298-.253l-1.693-3.384q-.104-.183-.033-.378t.253-.3t.387-.023t.309.262l1.692 3.366q.104.182.024.378q-.08.195-.262.299m6.019 0q-.183.104-.378.033t-.3-.253l-1.691-3.384q-.104-.183-.034-.378t.253-.3t.387-.023t.309.262l1.692 3.366q.104.182.024.378q-.08.195-.262.299m-12.02 0q-.182.104-.387.033t-.309-.253l-1.692-3.384q-.104-.183-.024-.378t.263-.3t.377-.023t.3.262l1.692 3.366q.104.182.033.378t-.252.299M7.5 15.5q-2.083 0-3.541-1.459Q2.5 12.583 2.5 10.5q0-1.94 1.308-3.356t3.275-1.633q.742-1.405 2.033-2.208Q10.408 2.5 12 2.5q2.154 0 3.701 1.428t1.801 3.559q1.84.111 2.92 1.28Q21.5 9.937 21.5 11.5q0 1.664-1.168 2.832T17.5 15.5zm0-1h10q1.242 0 2.121-.879T20.5 11.5t-.879-2.121T17.5 8.5h-1V8q0-1.861-1.32-3.18T12 3.5q-1.354 0-2.466.737t-1.67 1.97l-.116.293H7.45q-1.636.05-2.793 1.207T3.5 10.5q0 1.662 1.17 2.83T7.5 14.5M12 9"/></svg> {{ data.current.precipitation }} Millimeter</div>
+      <div class="flex items-center text-white font-bold text-4xl"> <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M10 23q0-.825.588-1.412T12 21v-5.725q.225.1.475.15t.525.05q1.05 0 1.763-.712T15.474 13v-.225l3.2.775q.4.1.725.35t.525.6l2.275 4.1q.375.675.275 1.425t-.65 1.3Q21.15 22 20.213 22t-1.613-.675l-4.6-4.6V21q.825 0 1.413.588T16 23zm-7-2v-2h5v2zm4.15-4.25l-4.5-1.275q-.725-.2-1.187-.812T1 13.275q0-.95.663-1.612T3.275 11h8.25q-.475.35-.737.863T10.525 13q0 .575.225 1.05t.625.825L8.75 16.55q-.35.2-.763.263t-.837-.063M13 14.5q-.625 0-1.062-.437T11.5 13t.438-1.062T13 11.5t1.063.438T14.5 13t-.437 1.063T13 14.5m2.3-2.45q-.275-.675-.888-1.1T13 10.525q-.275 0-.525.05t-.475.15v-3.95q0-.425.163-.8t.462-.65l3.425-3.2q.575-.55 1.338-.625t1.412.325q.8.5 1.038 1.413t-.263 1.712zM1 9V7h5v2zm3-4V3h6v2z"/></svg> {{ data.current.windSpeed10m }} Km/h</div>
+    </div>
+
 </div>
 
