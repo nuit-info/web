@@ -8,13 +8,14 @@ import { CommonModule } from '@angular/common';
 import {SideBarMeteoComponent} from "../side-bar-meteo/side-bar-meteo.component";
 import {MeteoService} from "../services/meteo.service";
 import {WeatherIconService} from "../services/weather-icon.service";
+import {FormsModule} from "@angular/forms";
 
 
 @Component({
   selector: 'app-meteo',
   standalone: true,
   imports: [
-    MapsModule, CommonModule, SideBarMeteoComponent
+    MapsModule, CommonModule, SideBarMeteoComponent, FormsModule
   ],
   providers: [ MarkerService, SelectionService],
   templateUrl: './meteo.component.html',
