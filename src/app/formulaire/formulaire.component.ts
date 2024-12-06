@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './formulaire.component.html',
-  styleUrl: './formulaire.component.css',
+  styleUrls: ['./formulaire.component.css'],
 })
 export class FormulaireComponent {
   inputValue: string = ''; // Variable to hold input value
@@ -45,9 +45,15 @@ export class FormulaireComponent {
   }
 
   submit(): void {
-    console.log('submitting');
+    // Vérification de la valeur entrée
+    if (this.inputValue.toLowerCase() === 'baleine') {
+      alert('Bravo, vous avez répondu correctement : "Baleine"');
+    } else {
+      alert('Désolé, ce n\'est pas la bonne réponse.');
+    }
   }
-  // Handle submit
+
+  // Gestion du déplacement du bouton
   moveButton(): void {
     const buttonsubmit = document.getElementById('buttonsubmit')!;
 
