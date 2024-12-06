@@ -10,7 +10,8 @@ import { Component } from '@angular/core';
 export class FormulaireComponent {
   inputValue: string = ''; // Variable to hold input value
   numberClick: number = 0;
-  clicksNeeded: number = Math.trunc(Math.random() * 5) + 3
+  clicksNeeded: number = Math.trunc(Math.random() * 5) + 3;
+  decalageCesar: number = Math.trunc(Math.random() * 5) + 4;
 
   // Handle input change
   onInputChange(event: Event): void {
@@ -18,10 +19,24 @@ export class FormulaireComponent {
     const newValue = input.value; // Nouvelle valeur du champ
     const previousValue = this.inputValue || ''; // Valeur précédente (par défaut vide)
 
+
     // Trouver la lettre ajoutée
-    const addedLetter = newValue.length > previousValue.length
-      ? newValue[newValue.length - 1] // Dernière lettre ajoutée
+    let addedLetterCode = newValue.length > previousValue.length
+      ? newValue[newValue.length - 1].charCodeAt(0) + this.decalageCesar // Dernière lettre ajoutée
       : null; // Rien ajouté, ou suppression
+
+    const addedLetter = addedLetterCode ? String.fromCharCode(addedLetterCode) : null;
+
+
+    // Si une lettre a été ajoutée et qu'elle est décalée
+    if (addedLetter !== null) {
+      // Remplacer la dernière lettre dans l'input par la lettre décalée
+      const modifiedValue = newValue.slice(0, newValue.length - 1) + addedLetter;
+      this.inputValue = modifiedValue; // Met à jour la valeur interne
+      input.value = modifiedValue; // Met à jour la valeur dans le champ de saisie
+    } else {
+      this.inputValue = newValue; // Met à jour la valeur interne sans modification
+    }
 
 
     console.log(addedLetter);
