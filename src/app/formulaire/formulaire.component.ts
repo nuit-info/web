@@ -12,7 +12,7 @@ export class FormulaireComponent {
   numberClick: number = 0;
   clicksNeeded: number = Math.trunc(Math.random() * 5) + 3;
 
-  // Handle input change
+  // Gestion de la saisie utilisateur
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value; // Update the input value
