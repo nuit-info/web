@@ -1,54 +1,53 @@
-# Template
+# Feature
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.10.
+Notre application permet de visualiser certains organes du corps humain.
 
-## Development server
+Ces organes sont cliquables et permettent d'afficher le lien entre l'organe et les océans.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Cliquez sur les organes pour voir apparaitre la pop-up.
 
 
---- Installation TailwindCSS ---
+# Installation
 
-1. Install TailwindCSS
-```bash
-npm install -D tailwindcss postcss autoprefixer
-```
+Le site est disponnible à l'adresse suivante : https://nuit-info-2024.freews.fr/
 
-2. Create TailwindCSS configuration file
-```bash
-npx tailwindcss init -p
-```
+sinon vous pouvez lancer l'application angular avec les commandes suivante :
+`````bash
+npm install 
+ng serve
+`````
 
-3. Add Tailwind in the CSS file
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
+Notre application implémente d'autre fonctionnalités liées à des défis et donc également au sujet de la nuit.
 
-4. update the `angular.json` file
-```json
-"styles": [
-  "src/styles.css"
-],
-```
+# Fonctionnalités
+
+Météo :
+
+Cliquez sur la deuxième icones en partant du haut sur votre gauche être redirigé vers la page météo.
+Sur cette page vous pourrez voir la météo de différents points du globe.
+
+La troisième icone permet d'activer ou désactiver l'annimation des icones de météo.
+
+La quatrième icone permet d'accéder à un captcha.
+
+la dernière permet l'accès à un formulaire un peu spécial !!
+
+N'hésiter pas à visiter le site, merci pour votre attention !
+
+# Auteurs
+
+Beaudeau Elyne
+
+Ceylan Emre
+
+Fréal-Saison Ludovic
+
+Cyril Berruyer
+
+Lebreton Andy
+
+Kulas Albert
+
+Marzouk Riyad 
+
+Brunot Mathieu
