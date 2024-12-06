@@ -39,26 +39,24 @@ export class FormulaireComponent {
     } else {
       this.inputValue = newValue; // Met à jour la valeur interne sans modification
     }
-
-    console.log(addedLetter);
-    this.inputValue = newValue;
   }
 
   onKeyDown(event: KeyboardEvent): void {
     // Désactiver Ctrl+V (pasting)
     if (event.ctrlKey && event.key === 'v') {
       event.preventDefault(); // Empêche le collage
-      alert('Haha bien essayer');
+      alert('Haha bien essayé');
     }
   }
 
   onContextMenu(event: MouseEvent): void {
     event.preventDefault();  // Disable right-click context menu
-    alert('Haha bien essayer');
+    alert('Haha bien essayé');
   }
 
   submit(): void {
     if (this.numberClick === this.clicksNeeded) {
+      console.log(this.inputValue);
       if (this.inputValue.toLowerCase() === "baleine") {
         alert("Bravo, vous avez répondu correctement : 'Baleine'");
       } else {
