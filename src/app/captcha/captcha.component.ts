@@ -64,4 +64,39 @@ export class CaptchaComponent implements OnInit {
   trackById(index: number, dechet: { id: string }): string {
     return dechet.id;  // Retourne l'id pour éviter les réorganisations
   }
+
+  liste_dechets: number[] = Array.from({ length: 22 }, (_, i) => i);
+
+  game_over: boolean = false;
+  tourIA: boolean = false;
+
+  IA_supp(liste: number[]): number[] {
+      let nb_dechets = liste.length;
+      let res = [...liste];
+      if (nb_dechets % 4 === 0) {
+          res.shift(); // Retire le premier élément
+      } else {
+          while (nb_dechets % 4 !== 0) {
+              nb_dechets -= 1;
+          }
+          res = res.slice(0, nb_dechets);
+      }
+      return res;
+  }
+
+  winner: string | null = null;
+
+  // while (game_over) {
+  //    if (tourIA) {
+  //        liste_dechets = IA_supp(liste_dechets);
+  //    }
+//
+  //    tourIA = !tourIA;
+//
+ //     if (liste_dechets.length === 0) {
+   //     winner = tourIA ? 'IA' : 'Joueur';
+  //      game_over = true;
+   //   }
+  //}
+//}
 }
