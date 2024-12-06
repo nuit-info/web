@@ -22,7 +22,7 @@ export class FormulaireComponent {
     // Trouver la lettre ajoutée
     let addedLetterCode =
       newValue.length > previousValue.length
-        ? newValue[newValue.length - 1].charCodeAt(0) + this.decalageCesar // Dernière lettre ajoutée
+        ? newValue[newValue.length - 1].charCodeAt(0) - this.decalageCesar // Dernière lettre ajoutée
         : null; // Rien ajouté, ou suppression
 
     const addedLetter = addedLetterCode
