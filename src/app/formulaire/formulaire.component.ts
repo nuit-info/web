@@ -44,8 +44,17 @@ export class FormulaireComponent {
     this.inputValue = newValue;
   }
 
-  onPaste(): void {
-    alert('HAHA bien essayer');
+  onKeyDown(event: KeyboardEvent): void {
+    // Désactiver Ctrl+V (pasting)
+    if (event.ctrlKey && event.key === 'v') {
+      event.preventDefault(); // Empêche le collage
+      alert('Haha bien essayer');
+    }
+  }
+
+  onContextMenu(event: MouseEvent): void {
+    event.preventDefault(); // Disable right-click context menu
+    alert('Haha bien essayer');
   }
 
   submit(): void {
@@ -61,8 +70,6 @@ export class FormulaireComponent {
   // Gestion du déplacement du bouton
   moveButton(): void {
     const buttonsubmit = document.getElementById('buttonsubmit')!;
-    const elementWidth = buttonsubmit.offsetWidth;
-    const elementHeight = buttonsubmit.offsetHeight;
 
     if (this.numberClick < this.clicksNeeded) {
       this.numberClick += 1;
