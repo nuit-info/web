@@ -16,7 +16,7 @@ export class MeteoService {
     const params = {
       "latitude": latitude,
       "longitude": longitude,
-      "current": ["temperature_2m", "precipitation", "wind_speed_10m", "wind_direction_10m"]
+      "current": ["temperature_2m", "precipitation", "wind_speed_10m", "wind_direction_10m", "is_day", "weather_code"]
     };
     const url = "https://api.open-meteo.com/v1/forecast";
     const responses = await fetchWeatherApi(url, params);
@@ -38,7 +38,7 @@ export class MeteoService {
     const longitude = response.longitude();
 
     const current = response.current()!;
-    console.log(current)
+
     // Note: The order of weather variables in the URL query and the indices below need to match!
     const weatherData = {
       current: {
@@ -47,10 +47,11 @@ export class MeteoService {
         precipitation: current.variables(1)!.value(),
         windSpeed10m: current.variables(2)!.value(),
         windDirection10m: current.variables(3)!.value(),
+        isDay: current.variables(4)!.value(),
+        weatherCode: current.variables(5)!.value(),
       },
 
     };
-    console.log(weatherData);
     return weatherData
   }
 }
