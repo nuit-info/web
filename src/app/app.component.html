@@ -10,4 +10,4 @@
   </nav>
   <router-outlet></router-outlet>
 </div>
-<app-rain-of-pictograms *ngIf="isRainActive" [pictogramFormats]="currentIcon" [intensity]="intensity" [density]="density"/>
+<app-rain-of-pictograms *ngIf="weatherIconService.getIcon() && isRainActive" [pictogramFormats]="weatherIconService.getIcon()" [intensity]="weatherIconService.getIntensity()" [density]="weatherIconService.getDensity()"/>

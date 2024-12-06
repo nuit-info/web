@@ -3,9 +3,11 @@ import {CommonModule, NgIf} from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {CaptchaComponent} from "./captcha/captcha.component";
 import {RainOfPictogramsComponent} from "./components/rain-of-pictograms/rain-of-pictograms.component";
-import {WeatherIcon} from "./models/weather-icon";
-import {WEATHER_ICON} from "./app.constant";
+import { RouterOutlet } from '@angular/router';
+import {RainOfPictogramsComponent} from "./components/rain-of-pictograms/rain-of-pictograms.component";
 import {MeteoService} from "./services/meteo.service";
+import {MeteoResponse} from "./models/meteo-response";
+import {WeatherIconService} from "./services/weather-icon.service";
 
 @Component({
   selector: 'app-root',
@@ -15,18 +17,11 @@ import {MeteoService} from "./services/meteo.service";
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  currentIcon!: WeatherIcon | WeatherIcon[];
-  density!: number; // Compris entre 1 et 5
-  intensity!: number; // Compris entre 1 et 5
   isRainActive: boolean = true;
 
-  constructor(private meteoService: MeteoService) {
-    this.currentIcon = WEATHER_ICON['CLOUDY'];
-    this.density = 1;
-    this.intensity = 3;
-  }
+  constructor(private meteoService: MeteoService, protected weatherIconService: WeatherIconService) {}
   ngOnInit(): void {
-    this.getUserLocationAndFetchWeather()
+    this.getUserLocationAndFetchWeather();
   }
 
   async getUserLocationAndFetchWeather() {
@@ -39,7 +34,7 @@ export class AppComponent implements OnInit {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
             // Appeler la fonction pour récupérer la météo
-            this.meteoService.getMeteo(latitude, longitude).then(value => console.log(value));
+            this.meteoService.getMeteo(latitude, longitude).then((value: MeteoResponse) => this.weatherIconService.manageIcon(value));
           },
           (error) => {
             console.error("Erreur de géolocalisation : ", error);

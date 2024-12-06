@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {NgFor, NgForOf, NgStyle} from "@angular/common";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {WeatherIcon} from "../../models/weather-icon";
@@ -10,11 +10,12 @@ import {WeatherIcon} from "../../models/weather-icon";
   templateUrl: './rain-of-pictograms.component.html',
   styleUrl: './rain-of-pictograms.component.css'
 })
-export class RainOfPictogramsComponent implements OnInit {
+export class RainOfPictogramsComponent implements OnInit, OnChanges {
   @Input() pictogramFormats: WeatherIcon | WeatherIcon[] = [];
   @Input() density: number = 1;
   @Input() intensity: number = 10;
   pictograms: { svg: SafeHtml; x: number; y: number; size: number, color: string, animationDelay: number }[] = [];
+  rainInterval: any;
 
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -22,9 +23,15 @@ export class RainOfPictogramsComponent implements OnInit {
     this.startRain();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['pictogramFormats'] || changes['density'] || changes['intensity']) {
+      this.resetRain();
+    }
+  }
+
   startRain() {
     const density = this.density >= 1 && this.density <= 5 ? this.density : 1;
-    setInterval(() => {
+    this.rainInterval = setInterval(() => {
       if (this.pictograms.length < 100 * density) {
         if(Array.isArray(this.pictogramFormats)){
           this.pictogramFormats.forEach((pictogram) => {
@@ -35,6 +42,12 @@ export class RainOfPictogramsComponent implements OnInit {
         }
       }
     }, 200/density);
+  }
+
+  resetRain() {
+    clearInterval(this.rainInterval); // Stoppe l'intervalle actuel
+    this.pictograms = []; // Réinitialise les pictogrammes
+    this.startRain(); // Redémarre la pluie
   }
 
   addPictogram(pictogram: WeatherIcon) {
