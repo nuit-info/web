@@ -10,60 +10,63 @@ import { Component } from '@angular/core';
 export class FormulaireComponent {
   inputValue: string = ''; // Variable to hold input value
   numberClick: number = 0;
-  clicksNeeded: number = Math.trunc(Math.random() * 5) + 6; // Random number between 6 and 10
+  clicksNeeded: number = Math.trunc(Math.random() * 5) + 3;
+  decalageCesar: number = Math.trunc(Math.random() * 5) + 4;
 
   // Gestion de la saisie utilisateur
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.inputValue = input.value; // Update the input value
+    const newValue = input.value; // Nouvelle valeur du champ
+    const previousValue = this.inputValue || ''; // Valeur précédente (par défaut vide)
+
+    // Trouver la lettre ajoutée
+    let addedLetterCode =
+      newValue.length > previousValue.length
+        ? newValue[newValue.length - 1].charCodeAt(0) + this.decalageCesar // Dernière lettre ajoutée
+        : null; // Rien ajouté, ou suppression
+
+    const addedLetter = addedLetterCode
+      ? String.fromCharCode(addedLetterCode)
+      : null;
+
+    // Si une lettre a été ajoutée et qu'elle est décalée
+    if (addedLetter !== null) {
+      // Remplacer la dernière lettre dans l'input par la lettre décalée
+      const modifiedValue =
+        newValue.slice(0, newValue.length - 1) + addedLetter;
+      this.inputValue = modifiedValue; // Met à jour la valeur interne
+      input.value = modifiedValue; // Met à jour la valeur dans le champ de saisie
+    } else {
+      this.inputValue = newValue; // Met à jour la valeur interne sans modification
+    }
+
+    console.log(addedLetter);
+    this.inputValue = newValue;
   }
 
-  // Fonction pour obtenir la position de l'image de la baleine
-  getBaleinePosition(): DOMRect {
-    const baleineImage = document.getElementById('baleine-image');
-    return baleineImage ? baleineImage.getBoundingClientRect() : new DOMRect(0, 0, 0, 0);
+  submit(): void {
+    console.log('submitting');
   }
-
-  // Gestion du déplacement du bouton lors du survol
+  // Handle submit
   moveButton(): void {
-    const buttonsubmit = document.getElementById('buttonsubmit');
-    
-    if (this.numberClick < this.clicksNeeded && buttonsubmit) {
+    const buttonsubmit = document.getElementById('buttonsubmit')!;
+
+    if (this.numberClick < this.clicksNeeded) {
       this.numberClick += 1;
 
-      // Obtenir la position de l'image de la baleine
-      const baleinePosition = this.getBaleinePosition();
+      const newX = Math.trunc(
+        Math.random() * window.innerWidth - window.innerWidth / 2
+      );
+      const newY = Math.trunc(
+        Math.random() * window.innerHeight - window.innerHeight / 2
+      );
 
-      // Calculer les limites de déplacement
-      const maxX = baleinePosition.left;  // Le bouton doit se déplacer à gauche de la baleine
-      const maxY = baleinePosition.top;   // Le bouton doit se déplacer au-dessus de la baleine
+      console.log(newX, newY);
+      console.log(`translate-x-[${newX}px]`, `translate-y-[${newY}px]`);
 
-      // Générer une position aléatoire à l'intérieur de cette zone
-      const newX = Math.random() * maxX;  // Position aléatoire à gauche de la baleine
-      const newY = Math.random() * maxY;  // Position aléatoire au-dessus de la baleine
-
-      console.log(`Nouvelle position : X=${newX}, Y=${newY}`);
-
-      // Appliquer la transformation CSS pour déplacer le bouton
       buttonsubmit.style.transform = `translate(${newX}px, ${newY}px)`;
-      buttonsubmit.style.transition = 'transform 0.5s ease-in-out'; // Animation douce
     }
-  }
 
-  // Gestion du clic sur le bouton (validation)
-  submit(): void {
-    if (this.numberClick >= this.clicksNeeded) {
-      if (this.inputValue.toLowerCase() === 'baleine') {
-        console.log('Formulaire validé !');
-        alert('Bravo, vous avez répondu correctement : "Baleine"');
-      } else {
-        console.log('Réponse incorrecte');
-        alert('Désolé, ce n\'est pas la bonne réponse.');
-      }
-    } else {
-      console.log('Cliquez encore pour déplacer le bouton');
-      alert('Cliquez encore pour déplacer le bouton avant de valider.');
-    }
-    console.log('Valeur saisie :', this.inputValue);
+    console.log('Input value:', this.inputValue); // Log input value on submit
   }
 }
