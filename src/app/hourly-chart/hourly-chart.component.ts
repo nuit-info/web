@@ -60,7 +60,7 @@ export class HourlyChartComponent implements OnInit {
     // Axes
     svg.append('g')
       .attr('transform', `translate(0,${height})`)
-      .call(d3.axisBottom(x).tickFormat(d3.timeFormat('%a %Hh'))); // Format : Jour Heure
+      .call(d3.axisBottom(x).tickFormat(d3.timeFormat('%a %Hh') as (d: number | { valueOf(): number }) => string));
 
     svg.append('g')
       .call(d3.axisLeft(y));
