@@ -4,8 +4,14 @@ export interface MeteoResponse {
     temperature2m: number;
     precipitation: number;
     windSpeed10m: number;
-    windDirection10m: number;
-    isDay: number;
+    isDay: number;  
+    weatherCode: number;
+  },
+  hourly?: {
+    time: Date[];
+    temperature2m: number;
+    rain: number;
+    windSpeed10m: number;
     weatherCode: number;
   },
 }

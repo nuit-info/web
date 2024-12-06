@@ -16,7 +16,8 @@ export class MeteoService {
     const params = {
       "latitude": latitude,
       "longitude": longitude,
-      "current": ["temperature_2m", "precipitation", "wind_speed_10m", "wind_direction_10m", "is_day", "weather_code"]
+      "current": ["temperature_2m", "is_day", "precipitation", "weather_code", "wind_speed_10m"],
+	    "hourly": ["temperature_2m", "rain", "weather_code", "wind_speed_10m"]
     };
     const url = "https://api.open-meteo.com/v1/forecast";
     const responses = await fetchWeatherApi(url, params);
@@ -24,6 +25,7 @@ export class MeteoService {
   }
 
   formatData(responses: any): MeteoResponse{
+        // Helper function to form time ranges
     const range = (start: number, stop: number, step: number) =>
       Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
 
@@ -38,20 +40,44 @@ export class MeteoService {
     const longitude = response.longitude();
 
     const current = response.current()!;
+    const hourly = response.hourly()!;
 
     // Note: The order of weather variables in the URL query and the indices below need to match!
     const weatherData = {
       current: {
         time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
-        temperature2m: current.variables(0)!.value().toFixed(1),
-        precipitation: current.variables(1)!.value().toFixed(1),
-        windSpeed10m: current.variables(2)!.value().toFixed(1),
-        windDirection10m: current.variables(3)!.value(),
-        isDay: current.variables(4)!.value(),
-        weatherCode: current.variables(5)!.value(),
+        temperature2m: current.variables(0)!.value(),
+        isDay: current.variables(1)!.value(),
+        precipitation: current.variables(2)!.value(),
+        weatherCode: current.variables(3)!.value(),
+        windSpeed10m: current.variables(4)!.value(),
+      },
+      hourly: {
+        time: range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map(
+          (t) => new Date((t + utcOffsetSeconds) * 1000)
+        ),
+        temperature2m: hourly.variables(0)!.valuesArray()!,
+        rain: hourly.variables(1)!.valuesArray()!,
+        weatherCode: hourly.variables(2)!.valuesArray()!,
+        windSpeed10m: hourly.variables(3)!.valuesArray()!,
       },
 
     };
-    return weatherData
+
+    // `weatherData` now contains a simple structure with arrays for datetime and weather data
+    for (let i = 0; i < weatherData.hourly.time.length; i++) {
+      console.log(
+        weatherData.hourly.time[i].toISOString(),
+        weatherData.hourly.temperature2m[i],
+        weatherData.hourly.rain[i],
+        weatherData.hourly.weatherCode[i],
+        weatherData.hourly.windSpeed10m[i]
+      );
+    }
+    return weatherData;
   }
 }
+
+
+
+

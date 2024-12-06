@@ -8,13 +8,14 @@ import { CommonModule } from '@angular/common';
 import {SideBarMeteoComponent} from "../side-bar-meteo/side-bar-meteo.component";
 import {MeteoService} from "../services/meteo.service";
 import {WeatherIconService} from "../services/weather-icon.service";
+import {FormsModule} from "@angular/forms";
 
 
 @Component({
   selector: 'app-meteo',
   standalone: true,
   imports: [
-    MapsModule, CommonModule, SideBarMeteoComponent
+    MapsModule, CommonModule, SideBarMeteoComponent, FormsModule
   ],
   providers: [ MarkerService, SelectionService],
   templateUrl: './meteo.component.html',
@@ -26,6 +27,7 @@ export class MeteoComponent implements OnInit{
   public openSideBar: boolean =false;
   public data: any;
   public background: string = '#006994';
+  public selected_tempo: string = "current";
 
   ngOnInit(): void {
     this.markerSettings = [{
@@ -66,7 +68,7 @@ export class MeteoComponent implements OnInit{
   async onMarkerClick(args: any) {
     this.openSideBar = !this.openSideBar;
 
-    this.meteoService.getMeteo(args.data.latitude, args.data.longitude).then(value => {
+    this.meteoService.getMeteo(args.data.latitude, args.data.longitude, ).then(value => {
       this.data = value
       this.weatherIconService.manageIcon(value)
       console.log(value)
